@@ -1,31 +1,31 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import './Explorer.css'
-import Directory from './directory/Directory.js'
+import RootDirectory from './rootDirectory/RootDirectory.js'
 
 
 export default function Explorer() {
-    const [selectedDirectory, setSelectedDirectory] = useState(null)
-    const [contents, setContents] = useState(null)
+    const [directoryData, setDirectoryData] = useState(null)
 
     const selectDirectory = async () => {
-        const res = await window.electronAPI.openDirectory()
-        setSelectedDirectory(res.selectedDirectory)
-        setContents(res.contents)
+        setDirectoryData(await window.electronAPI.selectDirectory())
     }
 
     useEffect(() => {
-        console.log(selectedDirectory)
-        console.log(contents)
-    }, [selectedDirectory, contents])
+        console.log(directoryData)
+    }, [directoryData])
 
 
     return (
         <div className='Explorer'>
-            {selectedDirectory === null && (
-                <button className='SelectDirectoryBtn' onClick={selectDirectory}>Select Directory</button>
-            )}
-            {selectedDirectory && <Directory directoryName={selectedDirectory} contents={contents}/>}
+            {directoryData === null &&
+                (<div className='NoSelectedDirectory'>
+                    <button className='SelectDirectoryBtn' onClick={selectDirectory}>Select Directory</button>
+                </div>)
+            }
+            {directoryData !== null &&
+                <RootDirectory directoryData={directoryData} />
+            }
         </div>
     )
 }

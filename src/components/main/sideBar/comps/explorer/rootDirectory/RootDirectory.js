@@ -1,13 +1,14 @@
 import { useState } from 'react';
 
-import './Directory.css'
+import './RootDirectory.css'
+import Directory from '../directory/Directory.js';
 import File from '../file/File.js'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 
-export default function Directory({ directoryData }) {
+export default function RootDirectory({ directoryData }) {
     const [openContents, setOpenContents] = useState(false)
 
     const toggleContents = (e) => {
@@ -17,8 +18,8 @@ export default function Directory({ directoryData }) {
 
 
     return (
-        <div className='Directory'>
-            <div className='Info' onClick={toggleContents}>
+        <div className='RootDirectory'>
+            <div className='RootInfo' onClick={toggleContents}>
                 <FontAwesomeIcon className='DirectoryIcon' icon={faAngleDown} size='1x' />
                 <label className={directoryData.name}>{directoryData.name}</label>
             </div>

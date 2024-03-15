@@ -26,7 +26,7 @@ export default function TopBarMenu() {
     return (
         <div className='TopBarMenu'>
             {Object.keys(menuInfo).map(menu => (
-                <div className='MenuBtn' id={menu} 
+                <div className='MenuBtn' id={menu}
                     onMouseEnter={() => handleMenuHover(menu)}
                     onClick={toggleMenu}
                 >

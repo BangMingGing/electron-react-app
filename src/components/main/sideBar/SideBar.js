@@ -12,18 +12,18 @@ export default function SideBar() {
 
 
     let compSellector = {
-        'Explorer': <Explorer/>
+        'Explorer': <Explorer />
     }
 
 
     return (
         <div className='SideBar'>
-            <SideBarMenu setCurrentComp={setCurrentComp}/>
+            <SideBarMenu setCurrentComp={setCurrentComp} />
             {currentComp &&
                 <div className='SideBarComp'>
                     {currentComp !== null && compSellector[currentComp]}
                 </div>
             }
-        </div>            
+        </div>
     )
 }

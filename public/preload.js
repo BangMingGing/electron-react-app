@@ -5,7 +5,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     minimizeMainWindow: () => ipcRenderer.send('minimizeMainWindow'),
     maximizeMainWindow: () => ipcRenderer.send('maximizeMainWindow'),
     closeMainWindow: () => ipcRenderer.send('closeMainWindow'),
-    openDirectory: () => ipcRenderer.invoke('openDirectory'),
-    searchClick: () => ipcRenderer.send('searchClick'),
+    selectDirectory: () => ipcRenderer.invoke('selectDirectory'),
     settingClick: () => ipcRenderer.send('settingClick')
 })

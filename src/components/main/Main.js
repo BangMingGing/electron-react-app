@@ -8,12 +8,12 @@ export default function Main() {
     const [currentPage, setCurrentPage] = useState('Home')
 
     let pageSellector = {
-        'Home' : <Home/>
+        'Home': <Home />
     }
 
     return (
         <div className='Main'>
-            <SideBar/>
+            <SideBar />
             <div className='Page'>
                 {pageSellector[currentPage]}
             </div>

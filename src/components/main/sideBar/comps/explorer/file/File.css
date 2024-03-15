@@ -1,4 +1,4 @@
-.Directory {
+.File {
     width: auto;
     background-color: #333;
     border: none;
@@ -6,7 +6,6 @@
     text-overflow: ellipsis; /* 텍스트가 넘칠때 (...)로 표시 */
     white-space: nowrap; /* 줄바꿈 방지 */
     display: flex;
-    flex-direction: column;
     padding-left: 15px;
 }
 
@@ -16,12 +15,7 @@
     flex-direction: row;
 }
 
-.Contents {
-    display: flex;
-    flex-direction: column;
-}
-
-.DirectoryIcon {
+.FileIcon {
     width: 16px;
     padding: 0 2px;
 }
