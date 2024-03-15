@@ -1,18 +1,21 @@
 .File {
-    width: auto;
+    width: 100%;
     background-color: #333;
     border: none;
     color: #ffffffcc;
     text-overflow: ellipsis; /* 텍스트가 넘칠때 (...)로 표시 */
     white-space: nowrap; /* 줄바꿈 방지 */
-    display: flex;
-    padding-left: 15px;
+    display: block;
 }
 
 .Info {
     display: flex;
     align-items: center;
     flex-direction: row;
+}
+
+.Info:hover {
+    background-color: #111;
 }
 
 .FileIcon {

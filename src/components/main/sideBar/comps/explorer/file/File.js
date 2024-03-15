@@ -10,10 +10,11 @@ export default function File({ fileData }) {
         e.stopPropagation()
     }
 
+    const paddingLeft = `${fileData.depth * 15}px`;
 
     return (
         <div className='File'>
-            <div className='Info' onClick={toggleContents}>
+            <div className='Info' onClick={toggleContents} style={{ paddingLeft }}>
                 <FontAwesomeIcon className='FileIcon' icon={faFile} size='1x' />
                 <label className={fileData.name} >{fileData.name}</label>
             </div>

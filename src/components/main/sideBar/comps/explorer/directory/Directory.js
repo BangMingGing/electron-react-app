@@ -4,7 +4,7 @@ import './Directory.css'
 import File from '../file/File.js'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function Directory({ directoryData }) {
@@ -15,11 +15,15 @@ export default function Directory({ directoryData }) {
         setOpenContents(!openContents)
     }
 
+    const paddingLeft = `${directoryData.depth * 15}px`;
 
     return (
         <div className='Directory'>
-            <div className='Info' onClick={toggleContents}>
-                <FontAwesomeIcon className='DirectoryIcon' icon={faAngleDown} size='1x' />
+            <div className='Info' onClick={toggleContents} style={{ paddingLeft }}>
+                {openContents ? 
+                    <FontAwesomeIcon className='DirectoryIcon' icon={faAngleRight} size='1x' /> :
+                    <FontAwesomeIcon className='DirectoryIcon' icon={faAngleDown} size='1x' />
+                }
                 <label className={directoryData.name}>{directoryData.name}</label>
             </div>
             <div className='Contents'>
