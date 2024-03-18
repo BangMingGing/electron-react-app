@@ -1,6 +1,6 @@
 import './App.css'
-import TopBar from './components/topBar/TopBar.js'
-import Main from './components/main/Main.js'
+import TopBar from './topBar/TopBar.js'
+import Main from './main/Main.js'
 
 export default function App() {
 

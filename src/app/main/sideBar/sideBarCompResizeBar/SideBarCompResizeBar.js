@@ -1,22 +1,12 @@
 import { useState, useEffect, useCallback } from 'react'
 
-import './SideBar.css'
-import Explorer from './comps/explorer/Explorer';
+import './SideBarCompResizeBar.css'
 
 
-import SideBarMenu from './sideBarMenu/SideBarMenu';
-
-
-export default function SideBar() {
-    const [currentComp, setCurrentComp] = useState(null)
+export default function SideBarCompResizeBar({ resizeComp }) {
+    const [width, setWidth] = useState(200);
     const [isResizing, setIsResizing] = useState(false);
     const [initialX, setInitialX] = useState(0);
-    const [width, setWidth] = useState(200);
-
-
-    let compSellector = {
-        'Explorer': <Explorer />
-    }
 
 
     // 마우스 누르면 Resize모드 true
@@ -26,7 +16,7 @@ export default function SideBar() {
         setIsResizing(true);
         setInitialX(e.clientX);
     };
-    
+
     // 마우스를 움직이면 width 계산하여 상태 업데이트
     const handleMouseMove = useCallback((e) => {
         if (isResizing) {
@@ -70,24 +60,21 @@ export default function SideBar() {
         };
     }, [isResizing, handleMouseMove]);
 
+    useEffect(() => {
+        if (resizeComp) {
+            resizeComp.style.width = `${width}px`
+        }
+    }, [width, resizeComp])
+
 
     return (
-        <div className='SideBar'>
-            <SideBarMenu setCurrentComp={setCurrentComp} />
-            {currentComp &&
-                <>
-                    <div className='SideBarComp' style={{ width: `${width}px` }}>
-                        {currentComp !== null && compSellector[currentComp]}
-                    </div>
-                    <div
-                        className="SideBarCompResizeBar"
-                        onMouseDown={handleMouseDown}
-                        onMouseUp={handleMouseUp}
-                        onMouseMove={handleMouseMove}
-                    >
-                    </div>
-                </>
-            }
+        <div
+            className="SideBarCompResizeBar"
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+        >
         </div>
     )
+
 }

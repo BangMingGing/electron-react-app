@@ -28,15 +28,14 @@ function activateEventHandler(mainWindow) {
           })
         
           if (!result.canceled) {
-            const selectedDirectory = result.filePaths[0]
-            const directoryName = path.basename(selectedDirectory)
+            const directoryPath = result.filePaths[0]
             
             const depth = 0
             return {
                 depth: depth,
                 type: 'directory',
-                name: directoryName,
-                contents: await getDirectoryContents(depth, selectedDirectory)
+                name: directoryPath,
+                contents: await getDirectoryContents(depth, directoryPath)
             }
           }
         
@@ -67,14 +66,14 @@ async function getDirectoryContents(depth, directoryPath) {
             directoryContents.push({
                 depth: depth + 1,
                 type: 'directory',
-                name: content,
+                name: contentPath,
                 contents: await getDirectoryContents(depth+1, contentPath)
             })
         } else {
             directoryContents.push({
                 depth: depth + 1,
                 type: 'file',
-                name: content
+                name: contentPath
             })
         }
     }

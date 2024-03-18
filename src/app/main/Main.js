@@ -6,7 +6,10 @@ import SideBar from "./sideBar/SideBar.js";
 
 export default function Main() {
     const [currentPage, setCurrentPage] = useState('Home')
+    const [files, setFiles] = useState([])
+    const [activeFileIndex, setActiveFileIndex] = useState(null);
 
+    
     let pageSellector = {
         'Home': <Home />
     }
