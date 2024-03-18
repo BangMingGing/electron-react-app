@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 import './SideBar.css'
 import Explorer from './comps/explorer/Explorer';
@@ -28,17 +28,17 @@ export default function SideBar() {
     };
     
     // 마우스를 움직이면 width 계산하여 상태 업데이트
-    const handleMouseMove = (e) => {
+    const handleMouseMove = useCallback((e) => {
         if (isResizing) {
             const movedDistance = e.clientX - initialX;
             const newWidth = width + movedDistance;
 
-            if (newWidth >= 150 && newWidth <= 2000) {
+            if (newWidth >= 150 && newWidth <= 600) {
                 setWidth(newWidth);
                 setInitialX(e.clientX);
             }
         }
-    };
+    }, [isResizing, initialX, width]);
 
     // 마우스 떼면 Resize모드 false
     const handleMouseUp = () => {
