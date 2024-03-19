@@ -1,25 +1,18 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 import './Main.css'
-import Home from "./pages/home/Home.js";
-import SideBar from "./sideBar/SideBar.js";
+import SideBar from './sideBar/SideBar.js'
+import Editor from './editor/Editor.js'
 
 export default function Main() {
-    const [currentPage, setCurrentPage] = useState('Home')
-    const [files, setFiles] = useState([])
-    const [activeFileIndex, setActiveFileIndex] = useState(null);
-
+    const [openedFileNames, setOpenedFileNames] = useState([])
+    const [currentFileName, setCurrentFileName] = useState(null)
     
-    let pageSellector = {
-        'Home': <Home />
-    }
 
     return (
         <div className='Main'>
-            <SideBar />
-            <div className='Page'>
-                {pageSellector[currentPage]}
-            </div>
+            <SideBar openedFileNames={openedFileNames} setOpenedFileNames={setOpenedFileNames} currentFileName={currentFileName} setCurrentFileName={setCurrentFileName}/>
+            <Editor openedFileNames={openedFileNames} setOpenedFileNames={setOpenedFileNames} currentFileName={currentFileName} setCurrentFileName={setCurrentFileName}/>
         </div>
     )
 }

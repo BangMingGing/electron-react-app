@@ -1,3 +1,4 @@
+// import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-solid-svg-icons';
 
@@ -5,15 +6,29 @@ import './File.css'
 
 
 
-export default function File({ fileData }) {
+export default function File({ index, fileData, propsFromMain }) {
+    
+    const fileName = fileData.name.split('\\').pop()
+    const paddingLeft = `${fileData.depth * 15}px`;
+    // const [bgColor, setBgColor] = useState('#333');
 
     const toggleContents = (e) => {
         e.stopPropagation()
+
+        if (!propsFromMain.openedFileNames.includes(fileData.name)) {
+            propsFromMain.setOpenedFileNames(prevOpenedFileNames => {
+                return[...prevOpenedFileNames, fileData.name]
+            })
+        }
+        propsFromMain.setCurrentFileName(fileName)
     }
 
-    const paddingLeft = `${fileData.depth * 15}px`;
+    // useEffect(() => {
+    //     if (propsFromMain.currentFileName === fileData.name) {
+    //         setBgColor('#111')
+    //     }
+    // }, [propsFromMain.currentFileName, fileData.name])
 
-    const fileName = fileData.name.split('\\').pop()
 
     return (
         <div className='File'>

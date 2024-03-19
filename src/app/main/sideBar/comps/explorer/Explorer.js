@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 
 import './Explorer.css'
-import RootDirectory from './rootDirectory/RootDirectory.js'
+import Directory from './directory/Directory.js'
 
 
-export default function Explorer() {
+export default function Explorer(props) {
     const [directoryData, setDirectoryData] = useState(null)
 
     const selectDirectory = async () => {
@@ -24,7 +24,7 @@ export default function Explorer() {
                 </div>)
             }
             {directoryData !== null &&
-                <RootDirectory directoryData={directoryData} />
+                <Directory index={1} directoryData={directoryData} props />
             }
         </div>
     )

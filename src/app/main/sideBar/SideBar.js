@@ -6,13 +6,13 @@ import SideBarCompResizeBar from './sideBarCompResizeBar/SideBarCompResizeBar';
 import Explorer from './comps/explorer/Explorer';
 
 
-export default function SideBar() {
+export default function SideBar(props) {
     const [currentComp, setCurrentComp] = useState(null)
 
     let compSellector = {
-        'Explorer': <Explorer />
+        'Explorer': <Explorer props />
     }
-    
+
     const resizeComp = document.getElementsByClassName('SideBarComp')[0]
 
 

@@ -20,8 +20,6 @@ function activateEventHandler(mainWindow) {
         mainWindow.close()
     })
 
-
-
     ipcMain.handle('selectDirectory', async () => {
         const result = await dialog.showOpenDialog(mainWindow, {
             properties: ['openDirectory'],
@@ -42,17 +40,20 @@ function activateEventHandler(mainWindow) {
           return []
     })
 
-    ipcMain.on('searchClick', () => {
-        console.log('searchClick')
-    })
-
-    ipcMain.on('settingClick', () => {
-        console.log('settingClick')
+    ipcMain.handle('getFileContent', async(fileName) => {
+        try {
+            const content = await fs.readFile(fileName, 'utf-8')
+            return content
+        } catch (error) {
+            console.log('Error Reading File :', error)
+            return `Error Reading File : ${error}`
+        }
     })
 
 }
 
 
+// selectDirectory 요청 관련 함수
 async function getDirectoryContents(depth, directoryPath) {
     const contents = await fs.readdirSync(directoryPath)
     const directoryContents = []
@@ -79,37 +80,40 @@ async function getDirectoryContents(depth, directoryPath) {
     }
 
     return directoryContents
+
+
+    // const responseData = 
+    // {
+    //     index: 1,
+    //     type: 'directory',
+    //     name: 'electron-react-app',
+    //     contents: [
+    //         {
+    //             index: 1,
+    //             type: 'directory',
+    //             name: 'public',
+    //             contents: [
+    //                 {
+    //                     index: 1,
+    //                     type: 'file',
+    //                     name: 'electron.js'
+    //                 },
+    //                 {
+    //                     index: 2,
+    //                     type: 'file',
+    //                     names: 'eventHandler.js'
+    //                 },
+    //                 {
+    //                     index: 3,
+    //                     type: 'file',
+    //                     names: 'preload.js'
+    //                 }
+    //             ]
+    //         }
+    //     ]
+    // }
 }
 
-// const responseData = 
-// {
-//     index: 1,
-//     type: 'directory',
-//     name: 'electron-react-app',
-//     contents: [
-//         {
-//             index: 1,
-//             type: 'directory',
-//             name: 'public',
-//             contents: [
-//                 {
-//                     index: 1,
-//                     type: 'file',
-//                     name: 'electron.js'
-//                 },
-//                 {
-//                     index: 2,
-//                     type: 'file',
-//                     names: 'eventHandler.js'
-//                 },
-//                 {
-//                     index: 3,
-//                     type: 'file',
-//                     names: 'preload.js'
-//                 }
-//             ]
-//         }
-//     ]
-// }
+
 
 module.exports = activateEventHandler
