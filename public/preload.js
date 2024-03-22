@@ -5,6 +5,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     minimizeMainWindow: () => ipcRenderer.send('minimizeMainWindow'),
     maximizeMainWindow: () => ipcRenderer.send('maximizeMainWindow'),
     closeMainWindow: () => ipcRenderer.send('closeMainWindow'),
-    selectDirectory: () => ipcRenderer.invoke('selectDirectory'),
+    getDirectoryData: () => ipcRenderer.invoke('getDirectoryData'),
     getFileContent: (fileName) => ipcRenderer.invoke('getFileContent', fileName)
 })

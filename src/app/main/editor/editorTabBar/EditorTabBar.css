@@ -1,0 +1,19 @@
+.EditorTabBar {
+    height: 32px;
+    background-color: #333;
+    color: hsla(0, 0%, 100%, 0.8);
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.tab {
+    width: 100px; /* 각 탭의 너비 설정 */
+    height: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

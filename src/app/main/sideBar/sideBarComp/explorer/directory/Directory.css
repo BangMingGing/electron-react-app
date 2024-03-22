@@ -3,23 +3,25 @@
     background-color: #333;
     border: none;
     color: #ffffffcc;
-    text-overflow: ellipsis; /* 텍스트가 넘칠때 (...)로 표시 */
-    white-space: nowrap; /* 줄바꿈 방지 */
-    display: block;
     flex-direction: column;
+    overflow: hidden;
+    white-space: nowrap; /* 줄바꿈 방지 */
+    text-overflow: ellipsis; /* 텍스트가 넘칠때 (...)로 표시 */
 }
 
-.Info {
-    display: flex;
+.DirectoryInfo {
+    display: block;
     align-items: center;
     flex-direction: row;
+    background-color: #333;
+    text-overflow: ellipsis;
 }
 
-.Info:hover {
+.DirectoryInfo:hover {
     background-color: #111;
 }
 
-.Contents {
+.DirectoryContents {
     display: flex;
     flex-direction: column;
 }

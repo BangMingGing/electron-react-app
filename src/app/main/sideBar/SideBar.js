@@ -1,30 +1,22 @@
-import { useState } from 'react'
+import { useSelector } from 'react-redux';
 
 import './SideBar.css'
-import SideBarMenu from './sideBarMenu/SideBarMenu';
-import SideBarCompResizeBar from './sideBarCompResizeBar/SideBarCompResizeBar';
-import Explorer from './comps/explorer/Explorer';
+import SideBarMenu from './sideBarMenu/SideBarMenu.js';
+import SideBarComp from './sideBarComp/SideBarComp.js';
 
 
-export default function SideBar(props) {
-    const [currentComp, setCurrentComp] = useState(null)
-
-    let compSellector = {
-        'Explorer': <Explorer props />
-    }
-
-    const resizeComp = document.getElementsByClassName('SideBarComp')[0]
-
-
+export default function SideBar() {
+    const sideBarComp = useSelector((state) => state.sideBarComp.sideBarComp)
+    
     return (
         <div className='SideBar'>
-            <SideBarMenu setCurrentComp={setCurrentComp} />
-            {currentComp &&
-                <div className='SideBarComp' id='SideBarComp'>
-                    {currentComp !== null && compSellector[currentComp]}
-                    <SideBarCompResizeBar resizeComp={resizeComp} />
-                </div>
-            }
+            <SideBarMenu />
+            {sideBarComp && (
+                <>
+                    <div style={{width: '1px', height: '100%', backgroundColor: '#666'}} />
+                    <SideBarComp />
+                </>
+            )}
         </div>
     )
 }

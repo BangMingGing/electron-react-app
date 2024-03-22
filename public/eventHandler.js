@@ -20,19 +20,21 @@ function activateEventHandler(mainWindow) {
         mainWindow.close()
     })
 
-    ipcMain.handle('selectDirectory', async () => {
+    ipcMain.handle('getDirectoryData', async () => {
         const result = await dialog.showOpenDialog(mainWindow, {
             properties: ['openDirectory'],
           })
         
           if (!result.canceled) {
             const directoryPath = result.filePaths[0]
+            const directoryName = path.basename(directoryPath)
             
             const depth = 0
             return {
                 depth: depth,
                 type: 'directory',
-                name: directoryPath,
+                path: directoryPath,
+                name: directoryName,
                 contents: await getDirectoryContents(depth, directoryPath)
             }
           }
@@ -40,9 +42,9 @@ function activateEventHandler(mainWindow) {
           return []
     })
 
-    ipcMain.handle('getFileContent', async(fileName) => {
+    ipcMain.handle('getFileContent', async(event, filePath) => {
         try {
-            const content = await fs.readFile(fileName, 'utf-8')
+            const content = await fs.promises.readFile(filePath, 'utf-8')
             return content
         } catch (error) {
             console.log('Error Reading File :', error)
@@ -67,14 +69,16 @@ async function getDirectoryContents(depth, directoryPath) {
             directoryContents.push({
                 depth: depth + 1,
                 type: 'directory',
-                name: contentPath,
+                path: contentPath,
+                name: content,
                 contents: await getDirectoryContents(depth+1, contentPath)
             })
         } else {
             directoryContents.push({
                 depth: depth + 1,
                 type: 'file',
-                name: contentPath
+                path: contentPath,
+                name: content
             })
         }
     }
@@ -86,26 +90,31 @@ async function getDirectoryContents(depth, directoryPath) {
     // {
     //     index: 1,
     //     type: 'directory',
+    //     path: ~~~,
     //     name: 'electron-react-app',
     //     contents: [
     //         {
     //             index: 1,
     //             type: 'directory',
+    //             path: ~~~,
     //             name: 'public',
     //             contents: [
     //                 {
     //                     index: 1,
     //                     type: 'file',
+    //                     path: ~~~,
     //                     name: 'electron.js'
     //                 },
     //                 {
     //                     index: 2,
     //                     type: 'file',
+    //                     path: ~~~,
     //                     names: 'eventHandler.js'
     //                 },
     //                 {
     //                     index: 3,
     //                     type: 'file',
+    //                     path: ~~~,
     //                     names: 'preload.js'
     //                 }
     //             ]

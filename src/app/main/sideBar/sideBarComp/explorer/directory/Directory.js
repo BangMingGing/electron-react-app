@@ -7,10 +7,9 @@ import File from '../file/File.js'
 
 
 
-export default function Directory({ index, directoryData, props }) {
+export default function Directory({ index, directoryData }) {
     const [openContents, setOpenContents] = useState(false)
 
-    const directoryName = directoryData.name.split('\\').pop()
     const paddingLeft = `${directoryData.depth * 15}px`
         
     const toggleContents = (e) => {
@@ -21,18 +20,18 @@ export default function Directory({ index, directoryData, props }) {
 
     return (
         <div className='Directory'>
-            <div className='Info' onClick={toggleContents} style={{ paddingLeft }}>
+            <div className='DirectoryInfo' onClick={toggleContents} style={{ paddingLeft }}>
                 {openContents ? 
                     <FontAwesomeIcon className='DirectoryIcon' icon={faAngleDown} size='1x' /> :
                     <FontAwesomeIcon className='DirectoryIcon' icon={faAngleRight} size='1x' />
                 }
-                <label className={directoryName}>{directoryName}</label>
+                <label className={directoryData.name}>{directoryData.name}</label>
             </div>
-            <div className='Contents'>
+            <div className='DirectoryContents'>
                 {(openContents && directoryData.contents) && directoryData.contents.map((content, index) => (
                     content.type === 'file' ?
-                        <File key={index} fileData={content} props={props} /> :
-                        <Directory key={index} directoryData={content} props={props} />
+                        <File key={index} fileData={content} /> :
+                        <Directory key={index} directoryData={content} />
                 ))}
             </div>
         </div>

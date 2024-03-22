@@ -1,5 +1,8 @@
 .Main {
-    flex: 1;
+    width: 100%;
+    height: calc(100% - 33px);
     display: flex;
     flex-direction: row;
+    background-color: #444;
+    z-index: 1;
 }

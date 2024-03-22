@@ -7,6 +7,7 @@ export default function App() {
     return (
         <div className='App'>
             <TopBar />
+            <div style={{ width: '100%', height: '1px', backgroundColor: '#666' }} />
             <Main />
         </div>
     )

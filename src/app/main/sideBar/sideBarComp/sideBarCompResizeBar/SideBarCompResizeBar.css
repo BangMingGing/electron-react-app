@@ -1,6 +1,5 @@
 .SideBarCompResizeBar {
     display: flex;
-    position: absolute;
     top: 0;
     right: -1.5px;
     width: 3px;
