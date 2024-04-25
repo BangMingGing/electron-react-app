@@ -24,7 +24,7 @@ export default function Editor() {
 
 
     return (
-        <div className='Editor' style={{ width: `${myWidth}`}}>
+        <div className='Editor'>
             {openedFiles.length !== 0 && 
                 <ul className='TabMenu'>
                     {openedFiles.map((fileInfo, index) => 

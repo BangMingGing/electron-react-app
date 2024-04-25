@@ -23,7 +23,7 @@ export default function SideBarCompResizeBar({ resizeComp }) {
             const movedDistance = e.clientX - initialX;
             const newWidth = width + movedDistance;
 
-            if (newWidth >= 150 && newWidth <= 600) {
+            if (newWidth >= 100 && newWidth <= 500) {
                 setWidth(newWidth);
                 setInitialX(e.clientX);
             }
